@@ -3,6 +3,15 @@
 #ifndef	_APUE_H
 #define	_APUE_H
 
+/* For Mac OS X 10.4>= */
+#if defined(MACOS)
+/* From <sys/socket.h> */
+#define	CMSG_LEN(l)		(__DARWIN_ALIGN(sizeof(struct cmsghdr)) + (l))
+/* From signal.h */
+#define SIGWINCH 28	/* window size changes */
+#define SIGINFO	29	/* information request */
+#endif
+
 #if defined(SOLARIS)
 #define _XOPEN_SOURCE	500	/* Single UNIX Specification, Version 2  for Solaris 9 */
 #define CMSG_LEN(x)	_CMSG_DATA_ALIGN(sizeof(struct cmsghdr)+(x))

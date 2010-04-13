@@ -1,6 +1,8 @@
 #include	"calld.h"
 #include	<errno.h>
 
+#include <sys/select.h> /* for fd_set */
+
 static void	cli_done(int);
 static void child_done(int);
 

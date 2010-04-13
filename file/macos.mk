@@ -1,6 +1,6 @@
 include ../Make.defines.macos
 
-PROGS =	access cdpwd changemod devrdev fileflags filetype ftw4 \
+PROGS = access cdpwd changemod fileflags filetype ftw4 \
 		hello hole longpath ls1 mycd seek testerror \
 		uidgid umask unlink zap
 
