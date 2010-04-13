@@ -1,0 +1,14 @@
+.DS\_Store
+Info.plist
+cscope.*
+*.pyc
+.lock-wscript
+
+# For gtags
+GPATH
+GRTAGS
+GSYMS
+GTAGS
+GTAGS.files
+
+build/

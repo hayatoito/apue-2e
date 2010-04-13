@@ -1,0 +1,10 @@
+def build(bld):
+
+  progs = 'buf tempfiles tempnam'
+
+  for prog in progs.split():
+    bld(features = 'cc cprogram',
+        source = prog + '.c',
+        target = prog,
+        uselib_local = ['apue',],
+        )

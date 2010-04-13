@@ -1,0 +1,13 @@
+def build(bld):
+
+  # extern csopen
+  bld(features = 'cc cstaticlib',
+      source = 'main.c',
+      target = 'open.fe_main',
+      )
+
+  bld(features = 'cc cprogram',
+      source = 'open.c',
+      target = 'openclient',
+      uselib_local = ['apue', 'open.fe_main'],
+      )

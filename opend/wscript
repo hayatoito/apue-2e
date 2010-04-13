@@ -1,0 +1,22 @@
+def build(bld):
+
+  source = 'client.c main.c request.c'
+
+  # extern loop
+  bld(features = 'cc cstaticlib',
+      source = source,
+      target = 'opend',
+      uselib_local = ['apue', 'opend.fe_cliargs',],
+      )
+
+  bld(features = 'cc cprogram',
+      source = 'loop.poll.c',
+      target = 'opend.poll',
+      uselib_local = ['apue', 'opend', 'opend.fe_cliargs',],
+      )
+
+  bld(features = 'cc cprogram',
+      source = 'loop.select.c',
+      target = 'opend.select',
+      uselib_local = ['apue', 'opend', 'opend.fe_cliargs',],
+      )

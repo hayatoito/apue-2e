@@ -1,0 +1,9 @@
+def build(bld):
+
+  source = 'loop.c driver.c main.c'
+
+  bld(features = 'cc cprogram',
+      source = source,
+      target = 'pty',
+      uselib_local = ['apue',],
+    )

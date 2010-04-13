@@ -1,0 +1,12 @@
+def build(bld):
+
+  bld(features = 'cc',
+      source = 'condvar.c mutex1.c mutex2.c mutex3.c rwlock.c',
+      )
+
+  for prog in 'threadid exitstatus cleanup badexit2'.split():
+    bld(features = 'cc cprogram',
+        source = prog + '.c',
+        target = prog,
+        uselib_local = ['apue',],
+        )

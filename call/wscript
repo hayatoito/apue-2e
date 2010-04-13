@@ -1,0 +1,8 @@
+def build(bld):
+  source = 'call.c main.c put.c take.c takeput.c escape.c loop.poll.c'
+
+  bld(features = 'cc cprogram',
+      source = source,
+      target = 'call',
+      uselib_local = ['apue', 'clconn'],
+      )

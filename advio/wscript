@@ -1,0 +1,9 @@
+def build(bld):
+  progs = 'devzero mcopy nonblockw pendlock'
+
+  for prog in progs.split():
+    bld(features = 'cc cprogram',
+        source = prog + '.c',
+        target = prog,
+        uselib_local = ['apue',],
+        )

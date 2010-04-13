@@ -13,7 +13,8 @@ static void	log_doit(int, int, const char *, va_list ap);
  * Caller must define and set this: nonzero if
  * interactive, zero if daemon
  */
-extern int	log_to_stderr;
+/* extern int	log_to_stderr; */
+int	log_to_stderr = 0;
 
 /*
  * Initialize syslog(), if running as daemon.

@@ -1,0 +1,7 @@
+def build(bld):
+
+  bld(features = 'cc cprogram',
+      source = 'open.c',
+      target = 'openclient',
+      uselib_local = ['apue', 'open.fe_main',],
+      )

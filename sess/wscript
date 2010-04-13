@@ -1,0 +1,9 @@
+def build(bld):
+
+  source = 'orphan3.c'
+
+  bld(features = 'cc cprogram',
+      source = source,
+      target = 'orphan3',
+      uselib_local = ['apue',],
+    )

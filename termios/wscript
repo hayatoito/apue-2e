@@ -1,0 +1,19 @@
+def build(bld):
+
+  bld(features = 'cc',
+      source = ['ctermid.c',],
+      )
+
+  for prog in ['isatty', 'ttyname', 'getpass',]:
+    bld(features = 'cc cprogram',
+        source = ['t_' + prog + '.c', prog + '.c'],
+        target = 't_' + prog,
+        uselib_local = ['apue',],
+        )
+
+  for prog in ['csize', 'settty', 't_raw', 'winch']:
+    bld(features = 'cc cprogram',
+        source = prog + '.c',
+        target = prog,
+        uselib_local = ['apue',],
+        )

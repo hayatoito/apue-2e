@@ -1,0 +1,13 @@
+def build(bld):
+
+  # extern err_msg, etc.
+  bld(features = 'cc cstaticlib',
+      source = 'cliargs.c',
+      target = 'opend.fe_cliargs',
+      )
+
+  bld(features = 'cc cprogram',
+      source = 'main.c request.c',
+      target = 'opend.fe_opend',
+      uselib_local = ['apue', 'opend.fe_cliargs',],
+      )

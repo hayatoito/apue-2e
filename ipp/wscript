@@ -1,0 +1,22 @@
+def build(bld):
+
+  bld(features = 'cc',
+      source = 'util.c',
+      target = 'util_o',
+      )
+
+  bld(features = 'cc cprogram',
+      source = 'print.c',
+      add_objects = 'util_o',
+      target = 'print',
+      lib = 'pthread',
+      uselib_local = ['apue', 'clconn',],
+      )
+
+  bld(features = 'cc cprogram',
+      source = 'printd.c',
+      add_objects = 'util_o',
+      target = 'printd',
+      lib = 'pthread',
+      uselib_local = ['apue', 'clconn', 'initsrv2'],
+      )

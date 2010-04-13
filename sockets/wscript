@@ -1,0 +1,39 @@
+def build(bld):
+  source = ('initsrv1.c recvfd.c sendfd.c'
+            ' cliconn.c servlisten.c servaccept.c spipe.c')
+
+  bld(features = 'cc',
+      source = source,
+      target = 'socket_objs')
+
+
+  bld(features = 'cc cshlib',
+      source = 'initsrv2.c',
+      target = 'initsrv2')
+
+  bld(features = 'cc cshlib',
+      source = 'clconn.c',
+      target = 'clconn')
+
+  bld(features = 'cc cprogram',
+      source = 'ruptime.c',
+      target = 'ruptime',
+      # add_objects = 'clconn_o',
+      uselib_local = ['apue', 'clconn'],
+      )
+
+  for prog in ['ruptimed', 'ruptimed-fd', 'ruptimed-dg']:
+    bld(features = 'cc cprogram',
+        source = prog + '.c',
+        target = prog,
+        uselib_local = ['apue', 'initsrv2'],
+      )
+
+  progs = ('findsvc bo ruptime-dg bindunix')
+
+  for prog in progs.split():
+    bld(features = 'cc cprogram',
+        source = prog + '.c',
+        target = prog,
+        uselib_local = ['apue',],
+      )

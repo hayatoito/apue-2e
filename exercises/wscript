@@ -1,0 +1,23 @@
+def build(bld):
+
+  source = 'sleep.c sleepus_poll.c sleepus_select.c asyncsocket.c'
+  progs = 'getpw44bsd getlogin sizepipe'
+  goodexit_source = 'goodexit.c openmax.c'
+
+  bld(features = 'cc',
+      source = source,
+      )
+
+  bld(features = 'cc cprogram',
+      source = goodexit_source,
+      target = 'goodexit',
+      lib = 'pthread',
+      uselib_local = ['apue',],
+      )
+
+  for prog in progs.split():
+    bld(features = 'cc cprogram',
+        source = prog + '.c',
+        target = prog,
+        uselib_local = ['apue',],
+        )

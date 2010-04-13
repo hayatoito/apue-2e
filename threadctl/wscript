@@ -1,0 +1,18 @@
+def build(bld):
+
+  bld(features = 'cc',
+      source = 'getenv1.c getenv2.c getenv3.c',
+      )
+
+  for prog in ['atfork', 'suspend',]:
+    bld(features = 'cc cprogram',
+        source = prog + '.c',
+        target = prog,
+        uselib_local = ['apue',],
+        )
+
+  bld(features = 'cc cprogram',
+      source = 'timeout.c detach.c',
+      target = 'timeout',
+      uselib_local = ['apue',],
+      )

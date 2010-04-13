@@ -1,0 +1,29 @@
+def build(bld):
+
+  def genc(task):
+    import Utils
+    src = task.inputs[0].srcpath(task.env)
+    out = task.outputs[0].bldpath(task.env)
+    Utils.exec_command('awk -f %s > %s' % (src, out))
+
+  bld(rule   = genc,
+      source = ['makeconf.awk',],
+      target = ['conf.c'],
+      )
+
+  bld(rule   = genc,
+      source = ['makeopt.awk',],
+      target = ['options.c'],
+      )
+
+  bld(features = 'cc cprogram',
+      source = 'conf.c',
+      target = 'conf',
+      uselib_local = ['apue',],
+      )
+
+  bld(features = 'cc cprogram',
+      source = 'options.c',
+      target = 'options',
+      uselib_local = ['apue',],
+      )
