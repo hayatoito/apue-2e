@@ -9,14 +9,16 @@
 int
 cli_conn(const char *name)
 {
-	int		fd;
+    int fd;
 
-	/* open the mounted stream */
-	if ((fd = open(name, O_RDWR)) < 0)
-		return(-1);
-	if (isastream(fd) == 0) {
-		close(fd);
-		return(-2);
-	}
-	return(fd);
+    /*
+     * open the mounted stream 
+     */
+    if ((fd = open(name, O_RDWR)) < 0)
+        return (-1);
+    if (isastream(fd) == 0) {
+        close(fd);
+        return (-2);
+    }
+    return (fd);
 }

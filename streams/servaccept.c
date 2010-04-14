@@ -7,13 +7,13 @@
  * Returns new fd if all OK, <0 on error.
  */
 int
-serv_accept(int listenfd, uid_t *uidptr)
+serv_accept(int listenfd, uid_t * uidptr)
 {
-	struct strrecvfd	recvfd;
+    struct strrecvfd recvfd;
 
-	if (ioctl(listenfd, I_RECVFD, &recvfd) < 0)
-		return(-1);		/* could be EINTR if signal caught */
-	if (uidptr != NULL)
-		*uidptr = recvfd.uid;	/* effective uid of caller */
-	return(recvfd.fd);	/* return the new descriptor */
+    if (ioctl(listenfd, I_RECVFD, &recvfd) < 0)
+        return (-1);            /* could be EINTR if signal caught */
+    if (uidptr != NULL)
+        *uidptr = recvfd.uid;   /* effective uid of caller */
+    return (recvfd.fd);         /* return the new descriptor */
 }
