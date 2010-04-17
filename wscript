@@ -9,8 +9,8 @@ def set_options(opt):
 @featured
 def configure(conf):
   conf.check_tool('compiler_cc')
-  conf.env.CPPPATH = includes
-  conf.env.CCFLAGS = ['-DMACOS']
+  conf.env.CPPPATH += includes
+  conf.env.CCFLAGS += ['-DMACOS']
 
 def shutdown():
   pass
@@ -22,6 +22,7 @@ def build(bld):
   dirs = ('lib sockets advio call calld daemons datafiles db environ exercises'
           ' file ipc ipp lock mycat open opend opend.fe open.fe proc pty'
           ' sess signals std stdio streams termios threadctl threads'
+          ' mytest'
           )
 
   for d in dirs.split():
