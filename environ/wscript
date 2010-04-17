@@ -1,10 +1,7 @@
+from my.wafutil import *
+
 def build(bld):
 
-  progs = 'doatexit testjmp'
-
-  for prog in progs.split():
-    bld(features = 'cc cprogram',
-        source = prog + '.c',
-        target = prog,
-        uselib_local = ['apue',],
-        )
+  c_program_list('doatexit testjmp',
+                 uselib_local = 'apue',
+                 )

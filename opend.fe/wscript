@@ -1,13 +1,13 @@
+from my.wafutil import *
+
 def build(bld):
 
   # extern err_msg, etc.
-  bld(features = 'cc cstaticlib',
-      source = 'cliargs.c',
-      target = 'opend.fe_cliargs',
-      )
+  c_static_library('opend.fe_cliargs',
+                   'cliargs.c',
+                   )
 
-  bld(features = 'cc cprogram',
-      source = 'main.c request.c',
-      target = 'opend.fe_opend',
-      uselib_local = ['apue', 'opend.fe_cliargs',],
-      )
+  c_program('opend.fe_opend',
+            'main.c request.c',
+            uselib_local = ['apue', 'opend.fe_cliargs',],
+            )

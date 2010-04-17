@@ -1,9 +1,8 @@
+from my.wafutil import *
+
 def build(bld):
 
-  source = 'loop.c driver.c main.c'
-
-  bld(features = 'cc cprogram',
-      source = source,
-      target = 'pty',
-      uselib_local = ['apue',],
-    )
+  c_program('pty',
+            'loop.c driver.c main.c',
+            uselib_local = 'apue',
+            )

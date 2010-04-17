@@ -1,13 +1,13 @@
+from my.wafutil import *
+
 def build(bld):
 
-  bld(features = 'cc cshlib',
-      source = 'db.c',
-      target = 'db',
-      uselib_local = ['apue',],
-      )
+  c_library('db',
+            'db.c',
+            uselib_local = 'apue',
+            )
 
-  bld(features = 'cc cprogram',
-      source = 't4.c',
-      target = 't4',
-      uselib_local = ['apue', 'db'],
-      )
+  c_library('t4',
+            't4.c',
+            uselib_local = 'apue db',
+            )

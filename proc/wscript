@@ -1,35 +1,28 @@
+from my.wafutil import *
+
 def build(bld):
 
-  progs = ('echoall echoarg exec1 exec2 fork1 fork2 pruids shell1 shell2'
-           ' systest3 tellwait1 tellwait2 test1 times1 vfork1 vfork3 wait1 zombie')
+  c_program_list('echoall echoarg exec1 exec2 fork1 fork2 pruids shell1 shell2'
+                 ' systest3 tellwait1 tellwait2 test1 times1 vfork1 vfork3 wait1 zombie',
+                 uselib_local = 'apue',
+                 )
 
-  for prog in progs.split():
-    bld(features = 'cc cprogram',
-        source = prog + '.c',
-        target = prog,
-        uselib_local = ['apue',],
-        )
+  c_static_library('proc_system',
+                   'system.c',
+                   )
 
-  bld(features = 'cc cstaticlib',
-      source = 'system.c',
-      target = 'proc_system',
-      )
+  c_program('systest1',
+            'systest1.c',
+            uselib_local = 'apue proc_system',
+            )
 
-  bld(features = 'cc cprogram',
-      source = 'systest1.c',
-      target = 'systest1',
-      uselib_local = ['apue', 'proc_system',],
-      )
+  c_program('systest2',
+            'systest2.c',
+            uselib_local = 'apue proc_system',
+            )
 
-  bld(features = 'cc cprogram',
-      source = 'systest2.c',
-      target = 'systest2',
-      uselib_local = ['apue', 'proc_system',],
-      )
-
-  bld(features = 'cc cprogram',
-      source = 'pracct.c',
-      target = 'pracct',
-      defines = ['HAS_AXIS', 'HAS_ACORE',],
-      uselib_local = ['apue',],
-      )
+  c_program('pracct',
+            'pracct.c',
+            defines = ['HAS_AXIS', 'HAS_ACORE',],
+            uselib_local = 'apue',
+            )

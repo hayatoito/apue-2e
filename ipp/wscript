@@ -1,22 +1,18 @@
+from my.wafutil import *
+
 def build(bld):
 
-  bld(features = 'cc',
-      source = 'util.c',
-      target = 'util_o',
-      )
+  c_static_library('ipp_util',
+                   'util.c')
 
-  bld(features = 'cc cprogram',
-      source = 'print.c',
-      add_objects = 'util_o',
-      target = 'print',
-      lib = 'pthread',
-      uselib_local = ['apue', 'clconn',],
-      )
+  c_program('print',
+            'print.c',
+            lib = 'pthread',
+            uselib_local = 'apue clconn ipp_util',
+            )
 
-  bld(features = 'cc cprogram',
-      source = 'printd.c',
-      add_objects = 'util_o',
-      target = 'printd',
-      lib = 'pthread',
-      uselib_local = ['apue', 'clconn', 'initsrv2'],
-      )
+  c_program('printd',
+            'printd.c',
+            lib = 'pthread',
+            uselib_local = 'apue clconn initsrv2 ipp_util',
+            )

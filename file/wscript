@@ -1,13 +1,9 @@
+from my.wafutil import *
+
 def build(bld):
 
-  progs = ('access cdpwd changemod fileflags filetype ftw4'
-           ' hello hole longpath ls1 mycd seek testerror'
-           ' uidgid umask unlink zap'
-           )
-
-  for prog in progs.split():
-    bld(features = 'cc cprogram',
-        source = prog + '.c',
-        target = prog,
-        uselib_local = ['apue',],
-        )
+  c_program_list('access cdpwd changemod fileflags filetype ftw4'
+                 ' hello hole longpath ls1 mycd seek testerror'
+                 ' uidgid umask unlink zap',
+                 uselib_local = 'apue',
+                 )

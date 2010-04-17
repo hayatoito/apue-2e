@@ -1,8 +1,8 @@
-def build(bld):
-  source = 'call.c main.c put.c take.c takeput.c escape.c loop.poll.c'
+from my.wafutil import *
 
-  bld(features = 'cc cprogram',
-      source = source,
-      target = 'call',
-      uselib_local = ['apue', 'clconn'],
-      )
+def build(bld):
+
+  c_program('call',
+            'call.c main.c put.c take.c takeput.c escape.c loop.poll.c',
+            uselib_local = 'apue clconn',
+            )

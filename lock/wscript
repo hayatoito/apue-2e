@@ -1,10 +1,7 @@
+from my.wafutil import *
+
 def build(bld):
 
-  progs = 'deadlock mandatory'
-
-  for prog in progs.split():
-    bld(features = 'cc cprogram',
-        source = prog + '.c',
-        target = prog,
-        uselib_local = ['apue',],
-        )
+  c_program_list('deadlock mandatory',
+                 uselib_local = 'apue',
+                 )

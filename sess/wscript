@@ -1,9 +1,8 @@
+from my.wafutil import *
+
 def build(bld):
 
-  source = 'orphan3.c'
-
-  bld(features = 'cc cprogram',
-      source = source,
-      target = 'orphan3',
-      uselib_local = ['apue',],
-    )
+  c_program('orphan3',
+            'orphan3.c',
+            uselib_local = 'apue',
+            )

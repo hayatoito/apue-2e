@@ -1,28 +1,15 @@
-import os
-import sys
+from my.wafutil import *
 
 def build(bld):
-  progs = ('critical mask read1 read2 reenter sigtstp'
-           ' sigusr suspend1 suspend2'
-           )
 
-  for prog in progs.split():
-    bld(features = 'cc cprogram',
-        source = prog + '.c',
-        target = prog,
-        uselib_local = ['apue',],
-      )
+  c_program_list('critical mask read1 read2 reenter sigtstp'
+                 ' sigusr suspend1 suspend2',
+                 uselib_local = 'apue',
+                 )
 
-  source = 'abort.c sleep1.c system.c'
+  c_compile('abort.c sleep1.c system.c')
 
-  bld(features = 'cc',
-      source = source,
-      )
-
-  tsleep2_source = 'sleep2.c tsleep2.c'
-
-  bld(features = 'cc cprogram',
-      source = tsleep2_source,
-      target = 'tsleep2',
-      uselib_local = ['apue',],
-      )
+  c_program('tsleep2',
+            'sleep2.c tsleep2.c',
+            uselib_local = 'apue',
+            )
