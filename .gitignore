@@ -12,3 +12,4 @@ GTAGS
 GTAGS.files
 
 build/
+fig*
