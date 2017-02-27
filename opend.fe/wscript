@@ -1,13 +1,6 @@
-from my.wafutil import *
-
 def build(bld):
-
-  # extern err_msg, etc.
-  c_static_library('opend.fe_cliargs',
-                   'cliargs.c',
-                   )
-
-  c_program('opend.fe_opend',
-            'main.c request.c',
-            uselib_local = ['apue', 'opend.fe_cliargs',],
-            )
+    # extern err_msg, etc.
+    bld.stlib(source='cliargs.c', target='opend.fe_cliargs',
+              use='apue_includes')
+    bld.program(source='main.c request.c', target='opend.fe_opend',
+                use='apue opend.fe_cliargs')

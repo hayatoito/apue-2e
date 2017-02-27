@@ -1,7 +1,3 @@
-from my.wafutil import *
-
 def build(bld):
-
-  c_program_list('buf tempfiles tempnam',
-                 uselib_local = 'apue',
-                 )
+    for target in 'buf tempfiles tempnam'.split():
+        bld.program(source=target + '.c', target=target, use='apue')

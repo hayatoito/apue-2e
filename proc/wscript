@@ -1,28 +1,13 @@
-from my.wafutil import *
-
 def build(bld):
+    for target in ('echoall echoarg exec1 exec2 fork1 fork2 pruids shell1 shell2'
+                   ' systest3 tellwait1 tellwait2 test1 times1 vfork1 vfork3 wait1 zombie').split():
+        bld.program(source=target + '.c', target=target, use='apue')
 
-  c_program_list('echoall echoarg exec1 exec2 fork1 fork2 pruids shell1 shell2'
-                 ' systest3 tellwait1 tellwait2 test1 times1 vfork1 vfork3 wait1 zombie',
-                 uselib_local = 'apue',
-                 )
+    bld.stlib(source='system.c', target='proc_system')
 
-  c_static_library('proc_system',
-                   'system.c',
-                   )
+    for target in 'systest1 systest2'.split():
+        bld.program(source=target + '.c', target=target, use='apue proc_system')
 
-  c_program('systest1',
-            'systest1.c',
-            uselib_local = 'apue proc_system',
-            )
-
-  c_program('systest2',
-            'systest2.c',
-            uselib_local = 'apue proc_system',
-            )
-
-  c_program('pracct',
-            'pracct.c',
-            defines = ['HAS_AXIS', 'HAS_ACORE',],
-            uselib_local = 'apue',
-            )
+    bld.program(source='pracct.c', target='pracct',
+                defines=['HAS_AXIS', 'HAS_ACORE',],
+                use='apue')

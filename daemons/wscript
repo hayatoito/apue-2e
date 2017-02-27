@@ -1,5 +1,3 @@
-from my.wafutil import *
-
 def build(bld):
-
-  c_compile('init.c lockfile.c reread.c reread2.c single.c')
+    bld.objects(source='init.c lockfile.c reread.c reread2.c single.c',
+                use='apue_includes')

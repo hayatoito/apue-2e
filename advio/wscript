@@ -1,7 +1,3 @@
-from my.wafutil import *
-
 def build(bld):
-
-  c_program_list('devzero mcopy nonblockw pendlock',
-                 uselib_local = 'apue',
-                 )
+    for target in 'devzero mcopy nonblockw pendlock'.split():
+        bld.program(source=target + '.c', target=target, use='apue')

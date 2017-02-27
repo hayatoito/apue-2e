@@ -1,5 +1,2 @@
-from my.wafutil import *
-
 def build(bld):
-
-  c_compile('getpwnam.c')
+    bld.objects(source='getpwnam.c')

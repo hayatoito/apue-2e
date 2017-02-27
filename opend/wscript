@@ -1,19 +1,8 @@
-from my.wafutil import *
-
 def build(bld):
-
-  # extern loop
-  c_static_library('opend',
-                   'client.c main.c request.c',
-                   uselib_local = 'apue opend.fe_cliargs',
-                   )
-
-  c_program('opend.poll',
-            'loop.poll.c',
-            uselib_local = 'apue opend opend.fe_cliargs',
-            )
-
-  c_program('opend.select',
-            'loop.select.c',
-            uselib_local = 'apue opend opend.fe_cliargs',
-            )
+    # extern loop
+    bld.stlib(source='client.c main.c request.c', target='opend',
+              use='apue opend.fe_cliargs')
+    bld.program(source='loop.poll.c', target='opend.poll',
+                use='apue opend opend.fe_cliargs')
+    bld.program(source='loop.select.c', target='opend.select',
+                use='apue opend opend.fe_cliargs')

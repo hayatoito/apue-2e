@@ -1,15 +1,7 @@
-from my.wafutil import *
-
 def build(bld):
+    for target in ('critical mask read1 read2 reenter sigtstp'
+                   ' sigusr suspend1 suspend2').split():
+        bld.program(source=target + '.c', target=target, use='apue')
 
-  c_program_list('critical mask read1 read2 reenter sigtstp'
-                 ' sigusr suspend1 suspend2',
-                 uselib_local = 'apue',
-                 )
-
-  c_compile('abort.c sleep1.c system.c')
-
-  c_program('tsleep2',
-            'sleep2.c tsleep2.c',
-            uselib_local = 'apue',
-            )
+    bld.objects(source='abort.c sleep1.c system.c')
+    bld.program(source='sleep2.c tsleep2.c', target='tsleep2', use='apue')

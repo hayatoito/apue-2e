@@ -1,7 +1,4 @@
-from my.wafutil import *
-
 def build(bld):
-
-  c_program_list('add2 add2stdio fifo1 myuclc pipe1 pipe2 pipe4 popen1 popen2 spipe4 tshm',
-                 uselib_local = 'apue',
-                 )
+    targets = 'add2 add2stdio fifo1 myuclc pipe1 pipe2 pipe4 popen1 popen2 spipe4 tshm'
+    for target in targets.split():
+        bld.program(source=target + '.c', target=target, use='apue')

@@ -4,55 +4,55 @@ import os
 
 def build(bld):
 
-  def genc(task):
-    import Utils
-    src = task.inputs[0].srcpath(task.env)
-    out = task.outputs[0].bldpath(task.env)
-    Utils.exec_command('awk -f %s > %s' % (src, out))
+    def genc(task):
+        import Utils
+        src = task.inputs[0].srcpath(task.env)
+        out = task.outputs[0].bldpath(task.env)
+        Utils.exec_command('awk -f %s > %s' % (src, out))
 
-  def genc2(task):
-    import Utils
-    src = task.inputs[0].srcpath(task.env)
-    inc1 = task.inputs[1].srcpath(task.env)
-    inc2 = task.inputs[2].srcpath(task.env)
-    out = task.outputs[0].bldpath(task.env)
+    def genc2(task):
+        import Utils
+        src = task.inputs[0].srcpath(task.env)
+        inc1 = task.inputs[1].srcpath(task.env)
+        inc2 = task.inputs[2].srcpath(task.env)
+        out = task.outputs[0].bldpath(task.env)
 
-    # blddir = os.path.split(out)[0]
-    # blddir = bld.path.abspath(task.env)
-    blddir = os.path.join(bld.path.abspath(task.env), os.path.pardir)
-    #print ('cp %s %s' % (src1, blddir))
-    Utils.exec_command('cp %s %s' % (inc1, blddir))
-    Utils.exec_command('cp %s %s' % (inc2, blddir))
-    Utils.exec_command('awk -f %s > %s' % (src, out))
+        # blddir = os.path.split(out)[0]
+        # blddir = bld.path.abspath(task.env)
+        blddir = os.path.join(bld.path.abspath(task.env), os.path.pardir)
+        #print ('cp %s %s' % (src1, blddir))
+        Utils.exec_command('cp %s %s' % (inc1, blddir))
+        Utils.exec_command('cp %s %s' % (inc2, blddir))
+        Utils.exec_command('awk -f %s > %s' % (src, out))
 
-  # makeconf.awk reads sysconf.sym and pathconf.sym
-  # We have to copy these files to build dir so that these files can be found.
-  bld(rule   = genc2,
-      source = 'makeconf.awk sysconf.sym pathconf.sym',
-      target = 'conf.c',
-      )
+    # makeconf.awk reads sysconf.sym and pathconf.sym
+    # We have to copy these files to build dir so that these files can be found.
+    bld(rule   = genc2,
+        source = 'makeconf.awk sysconf.sym pathconf.sym',
+        target = 'conf.c',
+        )
 
-  bld(rule   = genc2,
-      source = 'makeopt.awk sysopt.sym pathopt.sym',
-      target = 'options.c',
-      )
+    bld(rule   = genc2,
+        source = 'makeopt.awk sysopt.sym pathopt.sym',
+        target = 'options.c',
+        )
 
-  # bld(rule   = genc,
-  #     source = ['makeconf.awk',],
-  #     target = ['conf.c'],
-  #     )
+    # bld(rule   = genc,
+    #     source = ['makeconf.awk',],
+    #     target = ['conf.c'],
+    #     )
 
-  # bld(rule   = genc,
-  #     source = ['makeopt.awk',],
-  #     target = ['options.c'],
-  #     )
+    # bld(rule   = genc,
+    #     source = ['makeopt.awk',],
+    #     target = ['options.c'],
+    #     )
 
-  c_program('conf',
-            'conf.c',
-            uselib_local = 'apue',
-            )
+    c_program('conf',
+              'conf.c',
+              uselib_local = 'apue',
+              )
 
-  c_program('options',
-            'options.c',
-            uselib_local = 'apue',
-            )
+    c_program('options',
+              'options.c',
+              uselib_local = 'apue',
+              )

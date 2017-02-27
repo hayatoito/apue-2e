@@ -1,13 +1,3 @@
-from my.wafutil import *
-
 def build(bld):
-
-  c_library('db',
-            'db.c',
-            uselib_local = 'apue',
-            )
-
-  c_library('t4',
-            't4.c',
-            uselib_local = 'apue db',
-            )
+    bld.shlib(source='db.c', target='db', use='apue')
+    bld.shlib(source='t4.c', target='t4', use='apue db')

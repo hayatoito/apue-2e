@@ -1,19 +1,18 @@
-from my.wafutil import *
-
 def build(bld):
 
-  bld(rule   = 'cp ${SRC} ${TGT}',
-      source = 'bsd_ptyopen.c',
-      target = 'ptyopen.c',
-      )
+    # bld(rule   = 'cp ${SRC} ${TGT}',
+    #     source = 'bsd_ptyopen.c',
+    #     target = 'ptyopen.c',
+    #     )
 
-  c_library('apue',
-            'bufargs.c cliconn.c clrfl.c'
-            ' daemonize.c error.c errorlog.c lockreg.c locktest.c'
-            ' openmax.c pathalloc.c popen.c prexit.c prmask.c'
-            ' ptyfork.c ptyopen.c readn.c recvfd.c'
-            ' senderr.c sendfd.c servaccept.c servlisten.c'
-            ' setfl.c signal.c signalintr.c'
-            ' sleepus.c spipe.c'
-            ' tellwait.c ttymodes.c writen.c', # sleep.o pathconf.o sysconf.o'
-            )
+    bld.shlib(source='bufargs.c cliconn.c clrfl.c'
+              ' daemonize.c error.c errorlog.c lockreg.c locktest.c'
+              ' openmax.c pathalloc.c popen.c prexit.c prmask.c'
+              ' ptyfork.c ptyopen.c readn.c recvfd.c'
+              ' senderr.c sendfd.c servaccept.c servlisten.c'
+              ' setfl.c signal.c signalintr.c'
+              ' sleepus.c spipe.c'
+              ' tellwait.c ttymodes.c writen.c', # sleep.o pathconf.o sysconf.o'
+              target='apue',
+              use='apue_includes',
+              )

@@ -1,24 +1,12 @@
-from my.wafutil import *
-
 def build(bld):
-  c_compile('initsrv1.c recvfd.c sendfd.c'
-            ' cliconn.c servlisten.c servaccept.c spipe.c')
+    bld.objects(source='initsrv1.c recvfd.c sendfd.c'
+                       ' cliconn.c servlisten.c servaccept.c spipe.c',
+                use='apue_includes')
+    bld.shlib(source='initsrv2.c', target='initsrv2', use='apue_includes')
+    bld.shlib(source='clconn.c', target='clconn', use='apue_includes')
 
-  c_library('initsrv2',
-            'initsrv2.c')
+    for target in 'ruptimed ruptimed-fd ruptimed-dg'.split():
+        bld.program(source=target + '.c', target=target, use='apue initsrv2')
 
-  c_library('clconn',
-            'clconn.c')
-
-  c_program('ruptime',
-            'ruptime.c',
-            uselib_local = 'apue clconn',
-            )
-
-  c_program_list('ruptimed ruptimed-fd ruptimed-dg',
-                 uselib_local = 'apue initsrv2',
-                 )
-
-  c_program_list('findsvc bo ruptime-dg bindunix',
-                 uselib_local = 'apue',
-                 )
+    for target in 'findsvc bo ruptime-dg bindunix'.split():
+        bld.program(source=target + '.c', target=target, use='apue')

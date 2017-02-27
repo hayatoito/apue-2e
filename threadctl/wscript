@@ -1,14 +1,7 @@
-from my.wafutil import *
-
 def build(bld):
-
-  c_compile('getenv1.c getenv2.c getenv3.c')
-
-  c_program_list('atfork suspend',
-                 uselib_local = 'apue',
-                 )
-
-  c_program('timeout',
-            'timeout.c detach.c',
-            uselib_local = 'apue',
-            )
+    bld.objects(source='getenv1.c getenv2.c getenv3.c', use='apue_includes')
+    for target in 'atfork suspend'.split():
+        bld.program(source=target + '.c', target=target,
+                    lib='pthread', use='apue')
+    bld.program(source='timeout.c detach.c', target='timeout',
+                lib='pthread', use='apue')

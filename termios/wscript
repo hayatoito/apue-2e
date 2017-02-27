@@ -1,24 +1,7 @@
-from my.wafutil import *
-
 def build(bld):
-
-  c_compile('ctermid.c')
-
-  c_program('t_isatty',
-            't_isatty.c isatty.c',
-            uselib_local = 'apue',
-            )
-
-  c_program('t_ttyname',
-            't_ttyname.c ttyname.c',
-            uselib_local = 'apue',
-              )
-
-  c_program('t_getpass',
-            't_getpass.c getpass.c',
-            uselib_local = 'apue',
-            )
-
-  c_program_list('csize settty t_raw winch',
-                 uselib_local = 'apue',
-                 )
+    bld.objects(source='ctermid.c')
+    bld.program(source='t_isatty.c isatty.c', target='t_isatty', use='apue')
+    bld.program(source='t_ttyname.c ttyname.c', target='t_ttyname', use='apue')
+    bld.program(source='t_getpass.c getpass.c', target='t_getpass', use='apue')
+    for target in 'csize settty t_raw winch'.split():
+        bld.program(source=target + '.c', target=target, use='apue')

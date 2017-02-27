@@ -1,9 +1,4 @@
-from my.wafutil import *
-
 def build(bld):
-
-  c_compile('condvar.c mutex1.c mutex2.c mutex3.c rwlock.c')
-
-  c_program_list('threadid exitstatus cleanup badexit2',
-                 uselib_local = ['apue',],
-                 )
+    bld.objects(source='condvar.c mutex1.c mutex2.c mutex3.c rwlock.c')
+    for target in 'threadid exitstatus cleanup badexit2'.split():
+        bld.program(source=target + '.c', target=target, lib='pthread', use='apue')

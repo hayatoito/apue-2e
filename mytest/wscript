@@ -1,7 +1,2 @@
-from my.wafutil import *
-
 def build(bld):
-
-  c_program_list('mytest',
-                 uselib_local = 'apue',
-                 )
+    bld.program(source='mytest.c', target='mytest', use='apue')

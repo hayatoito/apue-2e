@@ -1,20 +1,20 @@
 /*
- * Our own header, to be included before all standard system headers 
+ * Our own header, to be included before all standard system headers
  */
 
 #ifndef _APUE_H
 #define _APUE_H
 
 /*
- * For Mac OS X 10.4>= 
+ * For Mac OS X 10.4>=
  */
 #if defined(MACOS)
 /*
- * From <sys/socket.h> 
+ * From <sys/socket.h>
  */
 #define CMSG_LEN(l)     (__DARWIN_ALIGN(sizeof(struct cmsghdr)) + (l))
 /*
- * From signal.h 
+ * From signal.h
  */
 #define SIGWINCH 28             /* window size changes */
 #define SIGINFO 29              /* information request */
@@ -90,7 +90,7 @@ int s_pipe(int *);              /* {Progs streams_spipe sock_spipe} */
 int
   recv_fd(int, ssize_t(*func) (int, const void *, size_t));     /* {Progs
                                                                  * recvfd_streams
-                                                                 * recvfd_sockets} 
+                                                                 * recvfd_sockets}
                                                                  */
 int send_fd(int, int);          /* {Progs sendfd_streams sendfd_sockets} */
 int send_err(int, int, const char *);   /* {Prog senderr} */
@@ -98,7 +98,7 @@ int serv_listen(const char *);  /* {Progs servlisten_streams
                                  * servlisten_sockets} */
 int serv_accept(int, uid_t *);  /* {Progs servaccept_streams
                                  * servaccept_sockets} */
-int cli_conn(const char *);     /* {Progs cliconn_streams cliconn_sockets} 
+int cli_conn(const char *);     /* {Progs cliconn_streams cliconn_sockets}
                                  */
 int buf_args(char *, int (*func) (int, char **));       /* {Prog bufargs} */
 
@@ -107,8 +107,8 @@ int ptym_open(char *, int);     /* {Progs3 ptyopen_streams ptyopen_bsd
 int ptys_open(char *);          /* {Progs3 ptyopen_streams ptyopen_bsd
                                  * ptyopen_linux} */
 #ifdef  TIOCGWINSZ
-pid_t pty_fork(int *, char *, int, const struct termios *, const struct winsize *);     /* {Prog 
-                                                                                         * ptyfork} 
+pid_t pty_fork(int *, char *, int, const struct termios *, const struct winsize *);     /* {Prog
+                                                                                         * ptyfork}
                                                                                          */
 #endif
 
@@ -144,7 +144,7 @@ void log_quit(const char *, ...);
 void log_ret(const char *, ...);
 void log_sys(const char *, ...);
 
-void TELL_WAIT(void);           /* parent/child from {Sec race_conditions} 
+void TELL_WAIT(void);           /* parent/child from {Sec race_conditions}
                                  */
 void TELL_PARENT(pid_t);
 void TELL_CHILD(pid_t);

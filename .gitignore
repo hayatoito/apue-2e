@@ -13,3 +13,5 @@ GTAGS.files
 
 build/
 fig*
+
+.lock-*

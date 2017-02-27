@@ -1,13 +1,4 @@
-from my.wafutil import *
-
 def build(bld):
-
-  # extern csopen
-  c_static_library('open.fe_main',
-                   'main.c',
-                   )
-
-  c_program('openclient',
-            'open.c',
-            uselib_local = 'apue open.fe_main',
-          )
+    # extern csopen
+    bld.stlib(source='main.c', target='open.fe_main', use='apue_includes')
+    bld.program(source='open.c', target='openclient', use='apue open.fe_main')

@@ -1,6 +1,11 @@
 #include <limits.h>
 #include <string.h>
 
+// TODO: Portable
+#ifndef ARG_MAX
+#define ARG_MAX 2048
+#endif
+
 static char envbuf[ARG_MAX];
 
 extern char **environ;

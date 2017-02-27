@@ -1,9 +1,6 @@
-from my.wafutil import *
-
 def build(bld):
-
-  c_program_list('access cdpwd changemod fileflags filetype ftw4'
-                 ' hello hole longpath ls1 mycd seek testerror'
-                 ' uidgid umask unlink zap',
-                 uselib_local = 'apue',
-                 )
+    targets = ('access cdpwd changemod fileflags filetype ftw4'
+               ' hello hole longpath ls1 mycd seek testerror'
+               ' uidgid umask unlink zap')
+    for target in targets.split():
+        bld.program(source=target + '.c', target=target, use='apue')

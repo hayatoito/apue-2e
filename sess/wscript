@@ -1,8 +1,2 @@
-from my.wafutil import *
-
 def build(bld):
-
-  c_program('orphan3',
-            'orphan3.c',
-            uselib_local = 'apue',
-            )
+    bld.program(source='orphan3.c', target='orphan3', use='apue')

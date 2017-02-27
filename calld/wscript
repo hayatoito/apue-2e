@@ -1,11 +1,8 @@
-from my.wafutil import *
-
 def build(bld):
-
-  c_program('calld',
-            'childdial.c cliargs.c client.c ctlstr.c debug.c devfile.c dialfile.c'
-            ' expectstr.c lock.c loop.c main.c request.c sendstr.c sigchld.c'
-            ' sysfile.c ttydial.c ttyopen.c',
-            lib = 'pthread',
-            uselib_local = 'apue clconn initsrv2',
-            )
+    bld.program(
+      source='childdial.c cliargs.c client.c ctlstr.c debug.c devfile.c dialfile.c'
+             ' expectstr.c lock.c loop.c main.c request.c sendstr.c sigchld.c'
+             ' sysfile.c ttydial.c ttyopen.c',
+      target='calld',
+      lib='pthread',
+      use='apue clconn initsrv2')

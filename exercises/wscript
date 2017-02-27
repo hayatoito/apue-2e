@@ -1,15 +1,7 @@
-from my.wafutil import *
-
 def build(bld):
-
-  c_compile('sleep.c sleepus_poll.c sleepus_select.c asyncsocket.c')
-
-  c_program('goodexit',
-            'goodexit.c openmax.c',
-            lib = 'pthread',
-            uselib_local = 'apue',
-            )
-
-  c_program_list('getpw44bsd getlogin sizepipe',
-                 uselib_local = 'apue',
-                 )
+    bld.objects(source='sleep.c sleepus_poll.c sleepus_select.c asyncsocket.c',
+                use='apue_includes')
+    bld.program(source='goodexit.c openmax.c', target='goodexit',
+                lib='pthread', use='apue')
+    for target in 'getpw44bsd getlogin sizepipe'.split():
+        bld.program(source=target + '.c', target=target, use='apue')

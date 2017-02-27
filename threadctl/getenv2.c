@@ -1,3 +1,6 @@
+/* For PTHREAD_MUTEX_RECURSIVE */
+#define _GNU_SOURCE
+
 #include <string.h>
 #include <errno.h>
 #include <pthread.h>

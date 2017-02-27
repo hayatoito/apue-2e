@@ -1,7 +1,3 @@
-from my.wafutil import *
-
 def build(bld):
-
-  c_program_list('doatexit testjmp',
-                 uselib_local = 'apue',
-                 )
+    bld.program(source='doatexit.c', target='doatexit', use='apue')
+    bld.program(source='testjmp.c', target='testjmp', use='apue')
